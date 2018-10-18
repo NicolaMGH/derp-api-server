@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  root to: "home#test"
+  root to: "home#yelp"
 end
