@@ -1,6 +1,7 @@
+require_relative '../yelp-fusion/yelp-api'
+
 class HomeController < ApplicationController
   def test
-    @user = User.create!(name: 'test', email: 'test@test.com', password_digest: '12345')
-    render json: @user
+    render json: yelp_search('spicy', 'mississauaga')
   end
 end
