@@ -1,6 +1,8 @@
 require 'net/http'
 require 'net/https'
 require 'dotenv'
+require 'json'
+require 'time'
 Dotenv.load
 
 def get_movies_by_location(coordinates)
@@ -19,12 +21,12 @@ def get_movies_by_location(coordinates)
   # Fetch Request
   res = http.request(req)
   puts "Response HTTP Status Code: #{res.code}"
-  puts "Response HTTP Response Body: #{res.body}"
-rescue StandardError => e
-  puts "HTTP Request failed (#{e.message})"
-
-  res.body
+  # puts "Response HTTP Response Body: #{res.body}"
+  return res.body
+  rescue StandardError => e
+    puts "HTTP Request failed (#{e.message})"
 end
+
 
 def get_movie_details(movie_id)
     uri = URI("https://api.internationalshowtimes.com/v4/movies/#{movie_id}")
@@ -48,6 +50,19 @@ rescue StandardError => e
   res.body
 end
 
+def random_movie(movies, start_time, end_time)
+  parsed = JSON.parse(movies)
+  movie = parsed["showtimes"][rand(0...parsed["showtimes"].length)]
+  parsed_time = Time.parse(movie["start_at"])
+  while !((start_time < parsed_time) && (parsed_time < end_time))
+    movie = parsed["showtimes"][rand(0...parsed["showtimes"].length)]
+    parsed_time = Time.parse(movie["start_at"])
+  end
+  movie
+end
 
-# get_movies_by_location([43.65,-79.38])
-get_movie_details(46257)
+
+movies = get_movies_by_location([43.65,-79.38])
+
+# get_movie_details(46257)
+puts random_movie(movies, Time.parse("2018-10-22T21:15:00-04:00"), Time.parse("2018-10-22T23:15:00-04:00") )
