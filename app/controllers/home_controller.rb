@@ -1,4 +1,5 @@
 require_relative '../yelp-fusion/yelp-api'
+require_relative '../google-distance/routes'
 
 class HomeController < ApplicationController
   def yelp
@@ -6,6 +7,6 @@ class HomeController < ApplicationController
   end
 
   def distance
-    render json:
+    render json: get_route
   end
 end
