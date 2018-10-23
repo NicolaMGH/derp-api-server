@@ -1,6 +1,8 @@
 require "json"
 require "http"
 require "optparse"
+require 'dotenv'
+Dotenv.load
 
 
 # Place holders for Yelp Fusion's API key. Grab it
@@ -17,7 +19,7 @@ BUSINESS_PATH = "/v3/businesses/"  # trailing / because we append the business i
 DEFAULT_BUSINESS_ID = "yelp-san-francisco"
 DEFAULT_TERM = "dinner"
 DEFAULT_LOCATION = "San Francisco, CA"
-SEARCH_LIMIT = 5
+SEARCH_LIMIT = 1
 
 
 # Make a request to the Fusion search endpoint. Full documentation is online at:
@@ -133,3 +135,5 @@ end
 # else
 #   puts "Please specify a command: search or lookup"
 # end
+
+puts yelp_search('dessert', 'toronto')

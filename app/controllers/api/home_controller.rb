@@ -8,4 +8,9 @@ class Api::HomeController < ApplicationController
   def distance
     # render json:
   end
+
+  def itinerary
+    # Generate itinerary
+    # Return itinerary
+  end
 end

@@ -1,5 +1,7 @@
 # This is a helper file that parses API info according to user arguments
 require_relative "./yelp-fusion/yelp-api"
+require_relative "./movie-search/movie-api"
+require_relative "./google-distance/google-direction"
 # Given an object of arguments, return an itinerary JSON object.
 
 def generate_intinerary(info)
@@ -15,6 +17,8 @@ def generate_intinerary(info)
       itinerary << yelp_search(coord)
     when 'Movie'
       #movie api
+      movies = get_movies_by_location(params[:location])
+      itinerary << random_movie(movies, start_time, end_time)
     else
       #invalid type
     end
