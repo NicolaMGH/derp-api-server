@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-<<<<<<< HEAD
-  root to: "home#distance"
-=======
   root to: "home#yelp"
 
   namespace :api do
@@ -9,5 +6,12 @@ Rails.application.routes.draw do
     resources :home, only: [:yelp]
   end
 
->>>>>>> 2dde8d683048f52fa9058a234d2687fb8b15b760
+
+
+  post '/register' => 'users#create'
+  post '/login' => 'sessions#create'
+  get '/logout' => 'sessions#destroy'
+
+
+
 end
