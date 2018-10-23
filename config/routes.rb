@@ -6,4 +6,11 @@ Rails.application.routes.draw do
     resources :home, only: [:yelp]
   end
 
+
+  post '/register' => 'users#create'
+  post '/login' => 'sessions#create'
+  get '/logout' => 'sessions#destroy'
+
+
+
 end
