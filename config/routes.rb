@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   end
 
 
-
+  post '/api/itinerary' => 'home#itinerary'
   post '/register' => 'users#create'
   post '/login' => 'sessions#create'
   get '/logout' => 'sessions#destroy'
