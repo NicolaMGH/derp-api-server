@@ -4,10 +4,11 @@ Rails.application.routes.draw do
   namespace :api do
     root to: "home#yelp"
     resources :home, only: [:yelp]
+    post '/itinerary' => 'home#itinerary'
+
   end
 
 
-  post '/api/itinerary' => 'home#itinerary'
   post '/register' => 'users#create'
   post '/login' => 'sessions#create'
   get '/logout' => 'sessions#destroy'
