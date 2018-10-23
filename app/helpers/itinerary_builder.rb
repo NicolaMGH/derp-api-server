@@ -23,6 +23,7 @@ def generate_intinerary(info)
       #invalid type
     end
   end
+  itinerary
 end
 
 # Use the google map API to get the route information for the itinerary
