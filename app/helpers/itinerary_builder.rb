@@ -1,24 +1,28 @@
 # This is a helper file that parses API info according to user arguments
-require_relative "./yelp-fusion/yelp-api"
-require_relative "./movie-search/movie-api"
-require_relative "./google-distance/google-direction"
+require_relative "../yelp-fusion/yelp-api"
+require_relative "../movie-search/movie-api"
+require_relative "../google-distance/google-direction"
+require 'time'
 # Given an object of arguments, return an itinerary JSON object.
 
-def generate_intinerary(info)
-  coord = info.coord
-  start_time = info.start_time
-  end_time = info.end_time
+def generate_intinerary(params)
+  coords = params['coords']
+  puts start_time = Time.parse(params['startTime'])
+  puts end_time = Time.parse(params['endTime'])
   time_frame = end_time - start_time
+  skeleton = params['skeleton']
   itinerary = []
 
-  info.order.each do |type|
+  skeleton.each do |type|
     case type
     when 'Restaurant'
-      itinerary << yelp_search(coord)
+      itinerary << yelp_random(coords)
     when 'Movie'
       #movie api
-      movies = get_movies_by_location(params[:location])
-      itinerary << random_movie(movies, start_time, end_time)
+      movies_list = get_movies_by_location(coords)
+      movie = random_movie(movies_list, start_time, end_time)
+      itinerary << movie
+      puts start_time = Time.parse(movie["start_at"])
     else
       #invalid type
     end

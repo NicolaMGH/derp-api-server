@@ -1,6 +1,10 @@
+require_relative '../helpers/itinerary_builder'
+
 class ItinerariesController < ApplicationController
   def create
-    # generate_intinerary(params)
-    # render :json
+    puts params
+    result = generate_intinerary(params)
+    # puts "Result #{result}"
+    render json: result
   end
 end

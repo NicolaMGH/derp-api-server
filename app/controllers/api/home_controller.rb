@@ -10,8 +10,5 @@ class Api::HomeController < ApplicationController
     # render json:
   end
 
-  def itinerary
-    # generate_intinerary(params)
-    # render :json
-  end
+
 end
