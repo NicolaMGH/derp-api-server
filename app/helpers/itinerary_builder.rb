@@ -5,7 +5,7 @@ require_relative "../google-distance/google-direction"
 require 'time'
 # Given an object of arguments, return an itinerary JSON object.
 
-def generate_intinerary(params)
+def generate_itinerary(params)
   coords = params['coords']
   puts start_time = Time.parse(params['startTime'])
   puts end_time = Time.parse(params['endTime'])
@@ -22,7 +22,10 @@ def generate_intinerary(params)
       movies_list = get_movies_by_location(coords)
       movie = random_movie(movies_list, start_time, end_time)
       itinerary << movie
-      puts start_time = Time.parse(movie["start_at"])
+      if movie['start_at'] != nil
+        start_time = Time.parse(movie["start_at"])
+      end
+      # start_time = start_time + 7200
     else
       #invalid type
     end
