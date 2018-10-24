@@ -19,7 +19,7 @@ BUSINESS_PATH = "/v3/businesses/"  # trailing / because we append the business i
 DEFAULT_BUSINESS_ID = "yelp-san-francisco"
 DEFAULT_TERM = "dinner"
 DEFAULT_LOCATION = "San Francisco, CA"
-SEARCH_LIMIT = 1
+SEARCH_LIMIT = 50
 
 
 # Make a request to the Fusion search endpoint. Full documentation is online at:
@@ -49,16 +49,17 @@ SEARCH_LIMIT = 1
 #        }
 #
 # Returns a parsed json object of the request
-def yelp_search(term, location)
+def yelp_random(coords)
   url = "#{API_HOST}#{SEARCH_PATH}"
   params = {
-    term: term,
-    location: location,
+    latitude: coords['lat'],
+    longitude: coords['lng'],
     limit: SEARCH_LIMIT
   }
 
   response = HTTP.auth("Bearer #{API_KEY}").get(url, params: params)
-  response.parse
+  result = response.parse
+  result['businesses'][rand(0..50)]
 end
 
 # Look up a business by a given business id. Full documentation is online at:
@@ -136,4 +137,5 @@ end
 #   puts "Please specify a command: search or lookup"
 # end
 
-puts yelp_search('dessert', 'toronto')
+coords = {"lng"=> -79.3951258, "lat"=>43.6444143}
+puts yelp_random(coords)

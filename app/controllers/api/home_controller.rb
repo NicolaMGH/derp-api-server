@@ -1,4 +1,5 @@
 require_relative '../../yelp-fusion/yelp-api'
+require_relative '../../helpers/itinerary_builder'
 
 class Api::HomeController < ApplicationController
   def yelp
@@ -9,8 +10,5 @@ class Api::HomeController < ApplicationController
     # render json:
   end
 
-  def itinerary
-    # Generate itinerary
-    # Return itinerary
-  end
+
 end
