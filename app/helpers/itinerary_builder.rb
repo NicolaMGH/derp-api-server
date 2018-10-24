@@ -22,7 +22,8 @@ def generate_intinerary(params)
       movies_list = get_movies_by_location(coords)
       movie = random_movie(movies_list, start_time, end_time)
       itinerary << movie
-      puts start_time = Time.parse(movie["start_at"])
+      start_time = Time.parse(movie["start_at"])
+      # start_time = start_time + 7200
     else
       #invalid type
     end
