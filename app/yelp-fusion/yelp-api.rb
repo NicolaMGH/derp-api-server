@@ -61,6 +61,7 @@ def yelp_random(coords)
   result = response.parse
   result = result['businesses'][rand(0..50)]
   result[:type] = 'restaurant'
+  result['route_coords'] = { 'lat' => result['coordinates']['latitude'], 'lng' => result['coordinates']['longitude'] }
   result
 end
 
