@@ -47,6 +47,7 @@ def get_movie_details(movie)
   parsed = JSON.parse(res.body)
   cinema = JSON.parse(get_cinema_details(movie['cinema_id']))
   return {
+    type: 'movie',
     start_at: movie['start_at'],
     title: parsed['movie']["title"],
     synopsis: parsed['movie']["synopsis"],

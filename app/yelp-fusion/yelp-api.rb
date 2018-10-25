@@ -59,7 +59,9 @@ def yelp_random(coords)
 
   response = HTTP.auth("Bearer #{API_KEY}").get(url, params: params)
   result = response.parse
-  result['businesses'][rand(0..50)]
+  result = result['businesses'][rand(0..50)]
+  result[:type] = 'restaurant'
+  result
 end
 
 # Look up a business by a given business id. Full documentation is online at:
