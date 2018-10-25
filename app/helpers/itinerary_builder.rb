@@ -37,9 +37,10 @@ def generate_itinerary(params)
 end
 
 # Use the google map API to get the route information for the itinerary
-def get_route(itinerary)
+def create_route(itinerary)
+  locations = []
   itinerary.each do |item|
-    #concat to query string
+    locations << item['route_coords']
   end
-  #make query to google map API
+  get_route(locations)
 end

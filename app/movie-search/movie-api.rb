@@ -56,7 +56,8 @@ def get_movie_details(movie)
     posters: parsed['movie']["poster_image"],
     movie_id: movie['movie_id'],
     booking_link: movie['booking_link'],
-    cinema: cinema['cinema']
+    cinema: cinema['cinema'],
+    route_coords: { 'lat' => cinema['cinema']['location']['lat'], 'lng' => cinema['cinema']['location']['lon'] }
   }
   rescue StandardError => e
     puts "HTTP Request failed (#{e.message})"
