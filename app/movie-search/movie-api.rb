@@ -28,8 +28,8 @@ def get_movies_by_location(coordinates)
 end
 
 
-def get_movie_details(movie_id)
-    uri = URI("https://api.internationalshowtimes.com/v4/movies/#{movie_id}")
+def get_movie_details(movie)
+  uri = URI("https://api.internationalshowtimes.com/v4/movies/#{movie['movie_id']}")
   # Create client
   http = Net::HTTP.new(uri.host, uri.port)
   http.use_ssl = true
@@ -43,11 +43,46 @@ def get_movie_details(movie_id)
   # Fetch Request
   res = http.request(req)
   puts "Response HTTP Status Code: #{res.code}"
-  puts "Response HTTP Response Body: #{res.body}"
-rescue StandardError => e
-  puts "HTTP Request failed (#{e.message})"
+  # puts "Response HTTP Response Body: #{res.body}"
+  parsed = JSON.parse(res.body)
+  cinema = JSON.parse(get_cinema_details(movie['cinema_id']))
+  return {
+    type: 'movie',
+    start_at: movie['start_at'],
+    title: parsed['movie']["title"],
+    synopsis: parsed['movie']["synopsis"],
+    runtime: parsed['movie']["runtime"],
+    genres: parsed['movie']["genres"],
+    posters: parsed['movie']["poster_image"],
+    movie_id: movie['movie_id'],
+    booking_link: movie['booking_link'],
+    cinema: cinema['cinema']
+  }
+  rescue StandardError => e
+    puts "HTTP Request failed (#{e.message})"
+    return { error: 'No matching movie found!' }
+end
 
-  res.body
+def get_cinema_details(cinema_id)
+  uri = URI("https://api.internationalshowtimes.com/v4/cinemas/#{cinema_id}")
+
+  # Create client
+  http = Net::HTTP.new(uri.host, uri.port)
+  http.use_ssl = true
+  http.verify_mode = OpenSSL::SSL::VERIFY_PEER
+
+  # Create Request
+  req =  Net::HTTP::Get.new(uri)
+  # Add headers
+  req.add_field "X-API-Key", ENV['MOVIE_KEY']
+
+  # Fetch Request
+  res = http.request(req)
+  puts "Response HTTP Status Code: #{res.code}"
+  # puts "Response HTTP Response Body: #{res.body}"
+  return res.body
+  rescue StandardError => e
+    puts "HTTP Request failed (#{e.message})"
 end
 
 def random_movie(movies, start_time, end_time)
@@ -67,10 +102,10 @@ def random_movie(movies, start_time, end_time)
   movie
 end
 
-coords = {"lng"=> -79.3951258, "lat"=>43.6444143}
-movies = get_movies_by_location(coords)
+# coords = {"lng"=> -79.3951258, "lat"=>43.6444143}
+# movies = get_movies_by_location(coords)
 
-puts movies
+# puts movies
 
-# get_movie_details(46257)
-puts random_movie(movies, Time.parse("2018-10-24T21:15:00-04:00"), Time.parse("2018-10-24T23:15:00-04:00") )
+# # get_movie_details(46257)
+# puts random_movie(movies, Time.parse("2018-10-24T21:15:00-04:00"), Time.parse("2018-10-24T23:15:00-04:00") )
