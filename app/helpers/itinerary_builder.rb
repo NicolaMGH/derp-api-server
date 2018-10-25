@@ -17,15 +17,18 @@ def generate_itinerary(params)
     case type
     when 'Restaurant'
       itinerary << yelp_random(coords)
+      start_time = start_time + 6400
     when 'Movie'
       #movie api
       movies_list = get_movies_by_location(coords)
       movie = random_movie(movies_list, start_time, end_time)
+      movie = get_movie_details(movie)
       itinerary << movie
-      if movie['start_at'] != nil
-        start_time = Time.parse(movie["start_at"])
+      if movie[:error] == nil
+        start_time = Time.parse(movie[:start_at])
+        puts start_time = start_time + (movie[:runtime] * 60)
+        # start_time = start_time + 7200
       end
-      # start_time = start_time + 7200
     else
       #invalid type
     end
