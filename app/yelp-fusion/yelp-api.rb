@@ -56,12 +56,12 @@ def yelp_random(coords)
     longitude: coords['lng'],
     limit: SEARCH_LIMIT
   }
-
+  puts "YELP-FUSION GET"
   response = HTTP.auth("Bearer #{API_KEY}").get(url, params: params)
   result = response.parse
   result = result['businesses'][rand(0..50)]
   result[:type] = 'restaurant'
-  result['route_coords'] = { 'lat' => result['coordinates']['latitude'], 'lng' => result['coordinates']['longitude'] }
+  result[:route_coords] = { 'lat' => result['coordinates']['latitude'], 'lng' => result['coordinates']['longitude'] }
   result
 end
 
@@ -140,5 +140,5 @@ end
 #   puts "Please specify a command: search or lookup"
 # end
 
-coords = {"lng"=> -79.3951258, "lat"=>43.6444143}
-puts yelp_random(coords)
+# coords = {"lng"=> -79.3951258, "lat"=>43.6444143}
+# puts yelp_random(coords)
