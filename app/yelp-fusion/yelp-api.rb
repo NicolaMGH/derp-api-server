@@ -50,8 +50,8 @@ SEARCH_LIMIT = 50
 #
 # Returns a parsed json object of the request
 def yelp_random(coords)
-  url = "#{API_HOST}#{SEARCH_PATH}"
-  params = {
+  puts url = "#{API_HOST}#{SEARCH_PATH}"
+  puts params = {
     latitude: coords['lat'],
     longitude: coords['lng'],
     limit: SEARCH_LIMIT

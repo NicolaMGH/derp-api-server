@@ -6,7 +6,7 @@ require 'time'
 # Given an object of arguments, return an itinerary JSON object.
 
 def generate_itinerary(params)
-  coords = params['coords']
+  puts coords = params['coords']
   start_time = Time.parse(params['startTime'])
   end_time = Time.parse(params['endTime'])
   time_frame = end_time - start_time
