@@ -6,9 +6,9 @@ require 'time'
 # Given an object of arguments, return an itinerary JSON object.
 
 def generate_itinerary(params)
-  coords = params['coords']
-  puts start_time = Time.parse(params['startTime'])
-  puts end_time = Time.parse(params['endTime'])
+  puts coords = params['coords']
+  start_time = Time.parse(params['startTime'])
+  end_time = Time.parse(params['endTime'])
   time_frame = end_time - start_time
   skeleton = params['skeleton']
   itinerary = []
@@ -23,11 +23,11 @@ def generate_itinerary(params)
       movies_list = get_movies_by_location(coords)
       movie = random_movie(movies_list, start_time, end_time)
       movie = get_movie_details(movie)
+      puts movie
       itinerary << movie
       if movie[:error] == nil
         start_time = Time.parse(movie[:start_at])
-        puts start_time = start_time + (movie[:runtime] * 60)
-        # start_time = start_time + 7200
+        start_time = start_time + (movie[:runtime] * 60)
       end
     else
       #invalid type
@@ -39,8 +39,11 @@ end
 # Use the google map API to get the route information for the itinerary
 def create_route(itinerary)
   locations = []
+  # puts itinerary
   itinerary.each do |item|
-    locations << item['route_coords']
+    if item[:error] == nil
+      locations << item[:route_coords]
+    end
   end
   get_route(locations)
 end

@@ -20,11 +20,11 @@ def get_movies_by_location(coordinates)
 
   # Fetch Request
   res = http.request(req)
-  puts "Response HTTP Status Code: #{res.code}"
+  puts "get_movies_by_location Response HTTP Status Code: #{res.code}"
   # puts "Response HTTP Response Body: #{res.body}"
   return res.body
   rescue StandardError => e
-    puts "HTTP Request failed (#{e.message})"
+    puts "get_movies_by_location HTTP Request failed (#{e.message})"
 end
 
 
@@ -42,7 +42,7 @@ def get_movie_details(movie)
 
   # Fetch Request
   res = http.request(req)
-  puts "Response HTTP Status Code: #{res.code}"
+  puts "get_movie_details Response HTTP Status Code: #{res.code}"
   # puts "Response HTTP Response Body: #{res.body}"
   parsed = JSON.parse(res.body)
   cinema = JSON.parse(get_cinema_details(movie['cinema_id']))
@@ -60,7 +60,7 @@ def get_movie_details(movie)
     route_coords: { 'lat' => cinema['cinema']['location']['lat'], 'lng' => cinema['cinema']['location']['lon'] }
   }
   rescue StandardError => e
-    puts "HTTP Request failed (#{e.message})"
+    puts "get_movie_details HTTP Request failed (#{e.message})"
     return { error: 'No matching movie found!' }
 end
 
@@ -79,11 +79,11 @@ def get_cinema_details(cinema_id)
 
   # Fetch Request
   res = http.request(req)
-  puts "Response HTTP Status Code: #{res.code}"
+  puts "get_cinema_details Response HTTP Status Code: #{res.code}"
   # puts "Response HTTP Response Body: #{res.body}"
   return res.body
   rescue StandardError => e
-    puts "HTTP Request failed (#{e.message})"
+    puts "get_cinema_details HTTP Request failed (#{e.message})"
 end
 
 def random_movie(movies, start_time, end_time)
