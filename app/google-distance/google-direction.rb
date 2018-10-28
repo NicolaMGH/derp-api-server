@@ -12,7 +12,7 @@ def get_route(locations)
   origin = locations[0]
   ori = "origin=#{origin['lat']},#{origin['lng']}"
   destination = locations[-1]
-  dest = "&destination=#{origin['lat']},#{origin['lng']}"
+  dest = "&destination=#{destination['lat']},#{destination['lng']}"
   # Get way points
   wp = ""
   waypoints = []
