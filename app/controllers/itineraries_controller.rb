@@ -8,7 +8,7 @@ class ItinerariesController < ApplicationController
     result[:itinerary] = generate_itinerary(params)
     result[:google_directions] = create_route(result[:itinerary])
 
-    @itinerary = Itinerary.create(name: "Kelvin", user_id: session[:user_id])
+    @itinerary = Itinerary.create!(name: "Kelvin", user_id: session[:user_id])
     result[:itinerary].map do |info|
       @itinerary.items.create(info: info)
     end

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   post '/register' => 'users#create'
   post '/login' => 'sessions#create'
   get '/logout' => 'sessions#destroy'
+  get '/loggedin' => 'users#name'
 
 
 

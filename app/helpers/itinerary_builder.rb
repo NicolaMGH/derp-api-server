@@ -26,6 +26,9 @@ def generate_itinerary(params)
       puts movie
       itinerary << movie
       if movie[:error] == nil
+        if movie[:runtime] == nil
+          movie[:runtime] = 120
+        end
         start_time = Time.parse(movie[:start_at])
         start_time = start_time + (movie[:runtime] * 60)
       end

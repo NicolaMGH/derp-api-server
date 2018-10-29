@@ -10,6 +10,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def name
+    @user = User.find_by(id: session[:user_id])
+    if @user != nil
+      render json: { name: @user.name, login: true }
+    else
+      render json: { login: false }
+    end
+  end
+
 
   private
 
