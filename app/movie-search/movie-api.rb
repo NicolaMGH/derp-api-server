@@ -94,8 +94,8 @@ def random_movie(movies, start_time, end_time)
   i = 0
   while !((start_time < parsed_time) && (parsed_time < end_time))
     i += 1
-    if i > 10000
-      return 'Not matching movie found.'
+    if i > 1000
+      return 'No matching movie found.'
     end
     movie = parsed["showtimes"][rand(0...parsed["showtimes"].length)]
     parsed_time = Time.parse(movie["start_at"])
