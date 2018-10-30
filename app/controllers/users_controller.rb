@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
     else
-
+      render json: {'error': 'password does not match'}
     end
   end
 
