@@ -1,24 +1,8 @@
-# README
+DERP (Daily Events Random Planner)
+=====================
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## This is the DERP Server
 
-Things you may want to cover:
+## Getting Started
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Follow 'getting started' at https://github.com/NicolaMGH/derp-react
